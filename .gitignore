@@ -1,0 +1,11 @@
+# Compiled executables and object files
+*.exe
+*.o
+*.out
+*.app
+
+# VS Code local build/debug configurations (optional if sharing tasks.json)
+.vscode/*.log
+
+# Temporary runtime test files
+temp_*.csv
