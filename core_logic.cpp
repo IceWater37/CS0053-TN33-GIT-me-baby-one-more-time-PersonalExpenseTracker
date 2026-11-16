@@ -86,3 +86,29 @@ void updateExpense(std::vector<Expense>& expenses) {
 
     std::cout << "  [Error] Expense ID #" << targetId << " not found.\n";
 }
+
+void deleteExpense(std::vector<Expense>& expenses) {
+    std::cout << "\n--- Delete Expense ---\n";
+
+    if (expenses.empty()) {
+        std::cout << "  No records available to delete.\n";
+        return;
+    }
+
+    int targetId = getValidInt("Enter Expense ID to delete: ", 1, 999999);
+
+    for (auto it = expenses.begin(); it != expenses.end(); ++it) {
+        if (it->id == targetId) {
+            std::cout << "  [Success] Deleted Expense ID #" << it->id
+                      << " (" << it->description << ").\n";
+
+            expenses.erase(it);
+            return;
+        }
+    }
+
+    std::cout << "  [Error] Expense ID #" << targetId << " not found.\n";
+}
+
+
+
