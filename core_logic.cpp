@@ -52,3 +52,37 @@ void viewExpenses(const std::vector<Expense>& expenses) {
                   << '\n';
     }
 }
+
+void updateExpense(std::vector<Expense>& expenses) {
+    std::cout << "\n--- Update Expense ---\n";
+
+    if (expenses.empty()) {
+        std::cout << "  No records available to update.\n";
+        return;
+    }
+
+    int targetId = getValidInt("Enter Expense ID to update: ", 1, 999999);
+
+    for (auto& expense : expenses) {
+        if (expense.id == targetId) {
+            std::cout << "Updating Record #" << expense.id
+                      << " (" << expense.description << ")\n";
+
+            expense.date = getValidDate("Enter new date (YYYY-MM-DD): ");
+            expense.category = getNonEmptyString("Enter new category: ");
+            expense.description =
+                getNonEmptyString("Enter new description: ");
+            expense.amount = getValidDouble(
+                "Enter new amount (PHP): ",
+                MIN_EXPENSE_AMOUNT,
+                MAX_EXPENSE_AMOUNT
+            );
+
+            std::cout << "  [Success] Expense ID #" << expense.id
+                      << " updated.\n";
+            return;
+        }
+    }
+
+    std::cout << "  [Error] Expense ID #" << targetId << " not found.\n";
+}
